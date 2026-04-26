@@ -1,3 +1,4 @@
+# 1. Подготовка системы и установка инструментов
 [astraadm@192 ~]$ sudo dnf groupinstall "Development Tools"
 
 We trust you have received the usual lecture from the local System
@@ -801,3 +802,6 @@ Installed:
   lua-devel-5.4.4-4.el9.x86_64                        lua-rpm-macros-1-6.el9.noarch
 
 Complete!
+# 2. Создание структуры директорий
+[root@192 ~]# mkdir -p ~/rpmbuild/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+
