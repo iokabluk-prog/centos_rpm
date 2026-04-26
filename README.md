@@ -647,3 +647,157 @@ Installed:
   rpm-devel-4.16.1.3-40.el9.x86_64    rpmlint-1.11-19.el9.noarch
 
 Complete!
+
+[astraadm@192 ~]$ sudo dnf install pcre-devel openssl-devel apr-devel apr-util-devel libxml2-devel
+Last metadata expiration check: 0:14:26 ago on Sun 26 Apr 2026 08:03:08 PM MSK.
+Package openssl-devel-1:3.5.5-1.el9.x86_64 is already installed.
+Dependencies resolved.
+===========================================================================================================
+ Package                       Architecture        Version                    Repository              Size
+===========================================================================================================
+Installing:
+ apr-devel                     x86_64              1.7.0-12.el9               appstream              229 k
+ apr-util-devel                x86_64              1.6.1-23.el9               appstream               75 k
+ libxml2-devel                 x86_64              2.9.13-14.el9              appstream              899 k
+ pcre-devel                    x86_64              8.44-4.el9                 appstream              506 k
+Installing dependencies:
+ apr                           x86_64              1.7.0-12.el9               appstream              123 k
+ apr-util                      x86_64              1.6.1-23.el9               appstream               95 k
+ apr-util-bdb                  x86_64              1.6.1-23.el9               appstream               13 k
+ cmake-filesystem              x86_64              3.31.8-3.el9               appstream               19 k
+ cyrus-sasl                    x86_64              2.1.27-21.el9              baseos                  73 k
+ cyrus-sasl-devel              x86_64              2.1.27-21.el9              appstream              113 k
+ expat-devel                   x86_64              2.5.0-6.el9                appstream               52 k
+ libdb-devel                   x86_64              5.3.28-57.el9              appstream               37 k
+ openldap-devel                x86_64              2.6.8-4.el9                appstream              746 k
+ pcre-cpp                      x86_64              8.44-4.el9                 appstream               26 k
+ pcre-utf16                    x86_64              8.44-4.el9                 appstream              184 k
+ pcre-utf32                    x86_64              8.44-4.el9                 appstream              174 k
+Installing weak dependencies:
+ apr-util-openssl              x86_64              1.6.1-23.el9               appstream               15 k
+
+Transaction Summary
+===========================================================================================================
+Install  17 Packages
+
+Total download size: 3.3 M
+Installed size: 18 M
+Is this ok [y/N]: y
+Downloading Packages:
+(1/17): cyrus-sasl-2.1.27-21.el9.x86_64.rpm                                118 kB/s |  73 kB     00:00
+(2/17): apr-1.7.0-12.el9.x86_64.rpm                                        110 kB/s | 123 kB     00:01
+(3/17): apr-util-bdb-1.6.1-23.el9.x86_64.rpm                               105 kB/s |  13 kB     00:00
+(4/17): apr-devel-1.7.0-12.el9.x86_64.rpm                                  150 kB/s | 229 kB     00:01
+(5/17): apr-util-devel-1.6.1-23.el9.x86_64.rpm                             262 kB/s |  75 kB     00:00
+(6/17): apr-util-openssl-1.6.1-23.el9.x86_64.rpm                           150 kB/s |  15 kB     00:00
+(7/17): apr-util-1.6.1-23.el9.x86_64.rpm                                    87 kB/s |  95 kB     00:01
+(8/17): cmake-filesystem-3.31.8-3.el9.x86_64.rpm                            84 kB/s |  19 kB     00:00
+(9/17): libdb-devel-5.3.28-57.el9.x86_64.rpm                               109 kB/s |  37 kB     00:00
+(10/17): expat-devel-2.5.0-6.el9.x86_64.rpm                                115 kB/s |  52 kB     00:00
+(11/17): cyrus-sasl-devel-2.1.27-21.el9.x86_64.rpm                         104 kB/s | 113 kB     00:01
+(12/17): pcre-cpp-8.44-4.el9.x86_64.rpm                                    158 kB/s |  26 kB     00:00
+(13/17): libxml2-devel-2.9.13-14.el9.x86_64.rpm                            576 kB/s | 899 kB     00:01
+(14/17): pcre-devel-8.44-4.el9.x86_64.rpm                                  502 kB/s | 506 kB     00:01
+(15/17): openldap-devel-2.6.8-4.el9.x86_64.rpm                             423 kB/s | 746 kB     00:01
+(16/17): pcre-utf16-8.44-4.el9.x86_64.rpm                                  580 kB/s | 184 kB     00:00
+(17/17): pcre-utf32-8.44-4.el9.x86_64.rpm                                  583 kB/s | 174 kB     00:00
+-----------------------------------------------------------------------------------------------------------
+Total                                                                      319 kB/s | 3.3 MB     00:10
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                   1/1
+  Installing       : apr-1.7.0-12.el9.x86_64                                                          1/17
+  Installing       : apr-util-bdb-1.6.1-23.el9.x86_64                                                 2/17
+  Installing       : apr-util-openssl-1.6.1-23.el9.x86_64                                             3/17
+  Installing       : apr-util-1.6.1-23.el9.x86_64                                                     4/17
+  Installing       : apr-devel-1.7.0-12.el9.x86_64                                                    5/17
+  Installing       : pcre-utf32-8.44-4.el9.x86_64                                                     6/17
+  Installing       : pcre-utf16-8.44-4.el9.x86_64                                                     7/17
+  Installing       : pcre-cpp-8.44-4.el9.x86_64                                                       8/17
+  Installing       : libdb-devel-5.3.28-57.el9.x86_64                                                 9/17
+  Installing       : expat-devel-2.5.0-6.el9.x86_64                                                  10/17
+  Installing       : cmake-filesystem-3.31.8-3.el9.x86_64                                            11/17
+  Running scriptlet: cyrus-sasl-2.1.27-21.el9.x86_64                                                 12/17
+  Installing       : cyrus-sasl-2.1.27-21.el9.x86_64                                                 12/17
+  Running scriptlet: cyrus-sasl-2.1.27-21.el9.x86_64                                                 12/17
+  Installing       : cyrus-sasl-devel-2.1.27-21.el9.x86_64                                           13/17
+  Installing       : openldap-devel-2.6.8-4.el9.x86_64                                               14/17
+  Installing       : apr-util-devel-1.6.1-23.el9.x86_64                                              15/17
+  Installing       : libxml2-devel-2.9.13-14.el9.x86_64                                              16/17
+  Installing       : pcre-devel-8.44-4.el9.x86_64                                                    17/17
+  Running scriptlet: pcre-devel-8.44-4.el9.x86_64                                                    17/17
+  Verifying        : cyrus-sasl-2.1.27-21.el9.x86_64                                                  1/17
+  Verifying        : apr-1.7.0-12.el9.x86_64                                                          2/17
+  Verifying        : apr-devel-1.7.0-12.el9.x86_64                                                    3/17
+  Verifying        : apr-util-1.6.1-23.el9.x86_64                                                     4/17
+  Verifying        : apr-util-bdb-1.6.1-23.el9.x86_64                                                 5/17
+  Verifying        : apr-util-devel-1.6.1-23.el9.x86_64                                               6/17
+  Verifying        : apr-util-openssl-1.6.1-23.el9.x86_64                                             7/17
+  Verifying        : cmake-filesystem-3.31.8-3.el9.x86_64                                             8/17
+  Verifying        : cyrus-sasl-devel-2.1.27-21.el9.x86_64                                            9/17
+  Verifying        : expat-devel-2.5.0-6.el9.x86_64                                                  10/17
+  Verifying        : libdb-devel-5.3.28-57.el9.x86_64                                                11/17
+  Verifying        : libxml2-devel-2.9.13-14.el9.x86_64                                              12/17
+  Verifying        : openldap-devel-2.6.8-4.el9.x86_64                                               13/17
+  Verifying        : pcre-cpp-8.44-4.el9.x86_64                                                      14/17
+  Verifying        : pcre-devel-8.44-4.el9.x86_64                                                    15/17
+  Verifying        : pcre-utf16-8.44-4.el9.x86_64                                                    16/17
+  Verifying        : pcre-utf32-8.44-4.el9.x86_64                                                    17/17
+
+Installed:
+  apr-1.7.0-12.el9.x86_64                              apr-devel-1.7.0-12.el9.x86_64
+  apr-util-1.6.1-23.el9.x86_64                         apr-util-bdb-1.6.1-23.el9.x86_64
+  apr-util-devel-1.6.1-23.el9.x86_64                   apr-util-openssl-1.6.1-23.el9.x86_64
+  cmake-filesystem-3.31.8-3.el9.x86_64                 cyrus-sasl-2.1.27-21.el9.x86_64
+  cyrus-sasl-devel-2.1.27-21.el9.x86_64                expat-devel-2.5.0-6.el9.x86_64
+  libdb-devel-5.3.28-57.el9.x86_64                     libxml2-devel-2.9.13-14.el9.x86_64
+  openldap-devel-2.6.8-4.el9.x86_64                    pcre-cpp-8.44-4.el9.x86_64
+  pcre-devel-8.44-4.el9.x86_64                         pcre-utf16-8.44-4.el9.x86_64
+  pcre-utf32-8.44-4.el9.x86_64
+
+Complete!
+[root@192 ~]# dnf config-manager --set-enabled crb
+[root@192 ~]# sudo dnf install lua-devel
+CentOS Stream 9 - BaseOS                                                   520  B/s |  15 kB     00:29
+CentOS Stream 9 - AppStream                                                 18 kB/s |  15 kB     00:00
+CentOS Stream 9 - CRB                                                      1.1 MB/s | 8.0 MB     00:07
+Dependencies resolved.
+===========================================================================================================
+ Package                      Architecture         Version                   Repository               Size
+===========================================================================================================
+Installing:
+ lua-devel                    x86_64               5.4.4-4.el9               crb                      22 k
+Installing dependencies:
+ lua-rpm-macros               noarch               1-6.el9                   appstream                10 k
+
+Transaction Summary
+===========================================================================================================
+Install  2 Packages
+
+Total download size: 32 k
+Installed size: 50 k
+Is this ok [y/N]: y
+Downloading Packages:
+(1/2): lua-rpm-macros-1-6.el9.noarch.rpm                                    48 kB/s |  10 kB     00:00
+(2/2): lua-devel-5.4.4-4.el9.x86_64.rpm                                     31 kB/s |  22 kB     00:00
+-----------------------------------------------------------------------------------------------------------
+Total                                                                      2.7 kB/s |  32 kB     00:12
+Running transaction check
+Transaction check succeeded.
+Running transaction test
+Transaction test succeeded.
+Running transaction
+  Preparing        :                                                                                   1/1
+  Installing       : lua-rpm-macros-1-6.el9.noarch                                                     1/2
+  Installing       : lua-devel-5.4.4-4.el9.x86_64                                                      2/2
+  Running scriptlet: lua-devel-5.4.4-4.el9.x86_64                                                      2/2
+  Verifying        : lua-rpm-macros-1-6.el9.noarch                                                     1/2
+  Verifying        : lua-devel-5.4.4-4.el9.x86_64                                                      2/2
+
+Installed:
+  lua-devel-5.4.4-4.el9.x86_64                        lua-rpm-macros-1-6.el9.noarch
+
+Complete!
