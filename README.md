@@ -1961,3 +1961,108 @@ Created symlink /etc/systemd/system/multi-user.target.wants/httpd-custom.service
 Apr 26 22:21:14 192.168.1.8 systemd[1]: Starting Custom Apache HTTP Server...
 Apr 26 22:21:19 192.168.1.8 systemd[1]: httpd-custom.service: Can't open PID file /usr/local/apache2/logs/>
 Apr 26 22:21:19 192.168.1.8 systemd[1]: Started Custom Apache HTTP Server.
+# Создаём собственный репозиторий и размещаем собранный RPM
+# 1. Копируем RPM в репозиторий
+[root@192 tmp]# sudo mkdir -p /usr/local/apache2/conf/extra
+[root@192 tmp]# sudo mkdir -p /var/www/html/myrepo/centos/9/x86_64
+[root@192 ~]# [root@192 tmp]# sudo cp ~/rpmbuild/RPMS/x86_64/httpd-custom-*.rpm /var/www/html/myrepo/centos/9/x86_64/
+# 2. Создаем метаданные репозитория
+[root@192 ~]# sudo dnf install -y createrepo_c
+Apache Local Repository (Custom build in /usr/local/apache2)               176 kB/s |  13 kB     00:00
+CentOS Stream 9 - BaseOS                                                    27 kB/s |  14 kB     00:00
+CentOS Stream 9 - BaseOS                                                   1.4 MB/s | 8.9 MB     00:06
+CentOS Stream 9 - AppStream                                                499  B/s |  15 kB     00:30
+CentOS Stream 9 - AppStream                                                1.2 MB/s |  27 MB     00:22
+CentOS Stream 9 - CRB                                                      1.3 kB/s |  14 kB     00:10
+CentOS Stream 9 - CRB                                                      4.3 MB/s | 8.0 MB     00:01
+CentOS Stream 9 - Extras packages                                           66 kB/s |  16 kB     00:00
+Package createrepo_c-0.20.1-4.el9.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+ sudo createrepo /var/www/html/myrepo/centos/9/x86_64/
+Directory walk started
+Directory walk done - 1 packages
+Temporary output repo path: /var/www/html/myrepo/centos/9/x86_64/.repodata/
+Preparing sqlite DBs
+Pool started (with 5 workers)
+Pool finished
+# Настройка веб-доступа к репозиторию
+# Настройка Apache для обслуживания репозитория
+# Создать конфигурацию для репозитория
+[root@192 tmp]# sudo tee /usr/local/apache2/conf/extra/repo.conf << 'EOF'
+# RPM Repository Configuration
+Alias /myrepo /var/www/html/myrepo
+
+<Directory "/var/www/html/myrepo">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+EOF
+# RPM Repository Configuration
+Alias /myrepo /var/www/html/myrepo
+
+<Directory "/var/www/html/myrepo">
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+[root@192 tmp]# sudo chown -R apache:apache /var/www/html/myrepo
+[root@192 tmp]# sudo chmod -R 755 /var/www/html/myrepo
+[root@192 tmp]# sudo /usr/local/apache2/bin/apachectl graceful
+[Fri May 01 19:03:48.187384 2026] [alias:warn] [pid 3469:tid 3469] AH00671: The Alias directive in /usr/local/apache2/conf/extra/repo.conf at line 2 will probably never match because it overlaps an earlier Alias.
+[Fri May 01 19:03:48.187710 2026] [alias:warn] [pid 3469:tid 3469] AH00671: The Alias directive in /usr/local/apache2/conf/extra/repo.conf at line 2 will probably never match because it overlaps an earlier Alias.
+[Fri May 01 19:03:48.187769 2026] [alias:warn] [pid 3469:tid 3469] AH00671: The Alias directive in /usr/local/apache2/conf/extra/repo.conf at line 2 will probably never match because it overlaps an earlier Alias.
+[Fri May 01 19:03:48.187833 2026] [alias:warn] [pid 3469:tid 3469] AH00671: The Alias directive in /usr/local/apache2/conf/extra/repo.conf at line 2 will probably never match because it overlaps an earlier Alias.
+[Fri May 01 19:03:48.187895 2026] [alias:warn] [pid 3469:tid 3469] AH00671: The Alias directive in /usr/local/apache2/conf/extra/repo.conf at line 2 will probably never match because it overlaps an earlier Alias.
+[root@192 tmp]# curl -I http://localhost/myrepo/centos/9/x86_64/repodata/repomd.xml
+HTTP/1.1 200 OK
+Date: Fri, 01 May 2026 16:04:12 GMT
+Server: Apache/2.4.62 (Unix)
+Last-Modified: Fri, 01 May 2026 16:03:23 GMT
+ETag: "c05-650c3b86b93b8"
+Accept-Ranges: bytes
+Content-Length: 3077
+Content-Type: application/xml
+# 3. Создание конфигурационного файла репозитория для клиентов[root@192 tmp]# sudo cat > /etc/yum.repos.d/apache-local.repo << 'EOF'
+[apache-local]
+name=Apache Local Repository (Custom build in /usr/local/apache2)
+baseurl=http://localhost/myrepo/centos/9/x86_64
+# Для использования с другого сервера, замените localhost на IP
+enabled=1
+gpgcheck=0
+priority=1
+EOF
+# Проверка репозитория
+[root@192 tmp]# curl -I http://localhost/myrepo/centos/9/x86_64/repodata/repomd.xml
+HTTP/1.1 200 OK
+Date: Fri, 01 May 2026 18:13:25 GMT
+Server: Apache/2.4.62 (Unix)
+Last-Modified: Fri, 01 May 2026 16:03:23 GMT
+ETag: "c05-650c3b86b93b8"
+Accept-Ranges: bytes
+Content-Length: 3077
+Content-Type: application/xml
+[root@192 tmp]# sudo dnf info httpd-custom
+Last metadata expiration check: 0:00:46 ago on Fri 01 May 2026 09:37:13 PM MSK.
+Installed Packages
+Name         : httpd-custom
+Version      : 2.4.62
+Release      : 1.el9
+Architecture : x86_64
+Size         : 29 M
+Source       : httpd-custom-2.4.62-1.el9.src.rpm
+Repository   : @System
+From repo    : @commandline
+Summary      : Custom Apache HTTP Server
+URL          : https://httpd.apache.org/
+License      : Apache 2.0
+Description  : Custom build of Apache HTTP Server with rewrite, SSL, and shared modules support.
+             : Installed to /usr/local/apache2
+[root@192 tmp]# sudo dnf install httpd-custom
+Package httpd-custom-2.4.62-1.el9.x86_64 is already installed.
+Dependencies resolved.
+Nothing to do.
+Complete!
+
